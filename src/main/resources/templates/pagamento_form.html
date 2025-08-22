@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário Pagamento</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #cfe0fc);
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: #004085;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 600px;
+            margin: auto;
+        }
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #004085;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1976d2;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #004085;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 th:text="${pagamento.id} == null ? 'Novo Pagamento' : 'Editar Pagamento'"></h1>
+</header>
+<main>
+    <form th:action="@{/pagamentos/salvar}" th:object="${pagamento}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label>Funcionário:</label>
+        <select th:field="*{funcionario}" required>
+            <option th:each="func : ${funcionarios}" th:value="${func}" th:text="${func.nome}"></option>
+        </select>
+
+        <label>Salário:</label>
+        <input type="number" step="0.01" th:field="*{salario}" required />
+
+        <label>Descontos:</label>
+        <input type="number" step="0.01" th:field="*{descontos}" />
+
+        <label>Benefícios:</label>
+        <input type="number" step="0.01" th:field="*{beneficios}" />
+
+        <label>Data Pagamento:</label>
+        <input type="date" th:field="*{dataPagamento}" required />
+
+        <button type="submit">Salvar</button>
+        <a href="/pagamentos">Cancelar</a>
+    </form>
+</main>
+</body>
+</html>
+

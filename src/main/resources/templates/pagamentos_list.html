@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagamentos</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #cfe0fc);
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: #004085;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 900px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #004085;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f7ff;
+        }
+        a {
+            color: #004085;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: #004085;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .new-btn:hover {
+            background: #1976d2;
+        }
+        .msg {
+            color: green;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Lista de Pagamentos</h1>
+</header>
+<main>
+    <p th:if="${mensagem}" th:text="${mensagem}" class="msg"></p>
+    <a href="/pagamentos/novo" class="new-btn">Novo Pagamento</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Funcionário</th>
+            <th>Salário</th>
+            <th>Descontos</th>
+            <th>Benefícios</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pag : ${pagamentos}">
+            <td th:text="${pag.id}"></td>
+            <td th:text="${pag.funcionario.nome}"></td>
+            <td th:text="${pag.salario}"></td>
+            <td th:text="${pag.descontos}"></td>
+            <td th:text="${pag.beneficios}"></td>
+            <td th:text="${pag.dataPagamento}"></td>
+            <td>
+                <a th:href="@{'/pagamentos/editar/' + ${pag.id}}">Editar</a> |
+                <a th:href="@{'/pagamentos/deletar/' + ${pag.id}}"
+                   onclick="return confirm('Deseja realmente deletar?');">Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Funcionário</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #90caf9);
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: #1565c0;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 800px;
+            margin: auto;
+        }
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 30px;
+        }
+        form label {
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: block;
+        }
+        form input, form select {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        form input:focus, form select:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 5px rgba(25,118,210,0.3);
+            outline: none;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        .buttons {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #1565c0;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1e88e5;
+        }
+        a.cancel-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: #ccc;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        a.cancel-btn:hover {
+            background: #b3b3b3;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 th:text="${funcionario.id} == null ? 'Novo Funcionário' : 'Editar Funcionário'"></h1>
+</header>
+<main>
+    <form th:action="@{/funcionarios/salvar}" th:object="${funcionario}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" required />
+        </div>
+
+        <div>
+            <label>Idade:</label>
+            <input type="number" th:field="*{idade}" min="16" required />
+        </div>
+
+        <div>
+            <label>Cargo:</label>
+            <input type="text" th:field="*{cargo}" required />
+        </div>
+
+        <div>
+            <label>Salário:</label>
+            <input type="number" step="0.01" th:field="*{salario}" min="0" required />
+        </div>
+
+        <div>
+            <label>Tipo Contratação:</label>
+            <input type="text" th:field="*{tipoContratacao}" required />
+        </div>
+
+        <div>
+            <label>Departamento:</label>
+            <input type="text" th:field="*{departamento}" required />
+        </div>
+
+        <div>
+            <label>Empresa:</label>
+            <input type="text" th:field="*{empresa}" required />
+        </div>
+
+        <div>
+            <label>Contato:</label>
+            <input type="text" th:field="*{contato}" required />
+        </div>
+
+        <div class="buttons full-width">
+            <a class="cancel-btn" href="/funcionarios">Cancelar</a>
+            <button type="submit">Salvar</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitação de Férias</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #cfe0fc);
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            background: #004085;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 600px;
+            margin: auto;
+        }
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background: #004085;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1976d2;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Solicitação de Férias</h1>
+</header>
+<main>
+    <form action="/api/ferias" method="post">
+        <input type="text" name="funcionario" placeholder="Nome do Funcionário" required>
+        <label for="inicio">Data de Início</label>
+        <input type="date" name="inicio" id="inicio" required>
+        <label for="fim">Data de Término</label>
+        <input type="date" name="fim" id="fim" required>
+        <label for="observacoes">Observações</label>
+        <textarea name="observacoes" id="observacoes" placeholder="Observações (opcional)" rows="4"></textarea>
+        <button type="submit">Solicitar Férias</button>
+    </form>
+</main>
+</body>
+</html>
+
